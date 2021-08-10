@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
+            <h:form id="PersonaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_identificacion}" for="identificacion" />
+                        <p:inputText id="identificacion" value="#{personaController.selected.identificacion}" title="#{bundle.CreatePersonaTitle_identificacion}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_identificacion}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.CreatePersonaTitle_apellido}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaDeNacimiento}" for="fechaDeNacimiento" />
+                        <p:calendar id="fechaDeNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaDeNacimiento}" title="#{bundle.EditPersonaTitle_fechaDeNacimiento}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_fechaDeNacimiento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{personaController.selected.sexo}" title="#{bundle.CreatePersonaTitle_sexo}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_sexo}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_grupoSanguineo}" for="grupoSanguineo" />
+                        <p:inputText id="grupoSanguineo" value="#{personaController.selected.grupoSanguineo}" title="#{bundle.CreatePersonaTitle_grupoSanguineo}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_grupoSanguineo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
